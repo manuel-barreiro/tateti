@@ -32,6 +32,7 @@ export function GameProvider ({ children }: GameContextProps): JSX.Element {
   const [turno, setTurno] = useState('➕')
   const [winner, setWinner] = useState('')
   
+  //Cada vez que clickeo un casillero se ejecuta, gestiona los turnos y va pintando el tablero.
   function handleClick(casillero: CasilleroType) {
     // Hacer una copia del tablero actual
     const newBoard = board.map((fila, indiceFila) => {
@@ -60,6 +61,7 @@ export function GameProvider ({ children }: GameContextProps): JSX.Element {
     setBoard(newBoard)
   }
 
+  //Función para determinar ganador, se ejecuta en el useEffect con board como dependencia
   function handleWinner() {
 
     //Chequeo ganador por filas iguales
