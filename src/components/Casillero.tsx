@@ -12,7 +12,7 @@ function Casillero({ casillero }: { casillero: CasilleroType }) {
         handleClick(casillero)
     }}
     >
-      <span className='font-black text-3xl'>{board[casillero[0]][casillero[1]]}</span>
+      <span className='font-black text-5xl'>{board[casillero[0]][casillero[1]]}</span>
     </div>
   )
 }

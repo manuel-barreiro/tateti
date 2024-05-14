@@ -28,9 +28,8 @@ type GameContextProps = {
 
 export function GameProvider ({ children }: GameContextProps): JSX.Element {
 
-  //Almacenar en un state el estado del tablero, [['X','O','X'],['X','O','X'],['X','O','X']]
   const [board, setBoard] = useState([['','',''],['','',''],['','','']])
-  const [turno, setTurno] = useState('X')
+  const [turno, setTurno] = useState('➕')
   const [winner, setWinner] = useState('')
   
   function handleClick(casillero: CasilleroType) {
@@ -43,7 +42,7 @@ export function GameProvider ({ children }: GameContextProps): JSX.Element {
         // Si es la columna del casillero clickeado
         if (indiceColumna === casillero[1] && valor === '') {
           // Colocar el valor del turno actual ('X' o 'O')
-          setTurno(prev => prev === 'X' ? 'O' : 'X')
+          setTurno(prev => prev === '➕' ? '⭕' : '➕')
           return turno;  
         } else {
           // Mantener el valor de las otras casillas
@@ -52,7 +51,7 @@ export function GameProvider ({ children }: GameContextProps): JSX.Element {
       });
     } else {
       // Mantener las filas que no son la del casillero clickeado
-      setTurno(prev => prev === 'X' ? 'O' : 'X')
+      setTurno(prev => prev === '➕' ? '⭕' : '➕')
       return fila;
       }
     });
@@ -111,37 +110,18 @@ export function GameProvider ({ children }: GameContextProps): JSX.Element {
     handleWinner()
   }, [board])
   
+  //Emojis de confetti según resultado
   useEffect(() => {
     // console.log(winner)
     if (winner !== '') {
       const jsConfetti = new JSConfetti()
       jsConfetti.addConfetti({
-        emojis: winner === 'X' ? ['❌'] : winner === 'O' ? ['⭕'] : winner === 'EMPATE' ? ['🫱🏼‍🫲🏼'] : [],
+        emojis: winner === '➕' ? ['➕'] : winner === '⭕' ? ['⭕'] : winner === 'EMPATE' ? ['🫱🏼‍🫲🏼'] : [],
         emojiSize: 60,
         confettiNumber: 200,
       })
     }
   }, [winner])
-
-
-  // // Read localStorage
-  // useEffect(() => {
-  //   const pokemonLS: string | null = localStorage.getItem('my_pokemon')
-  //   if (pokemonLS) {
-  //     const myPokemonLS = JSON.parse(pokemonLS)
-  //     if (myPokemonLS.length > 0) {
-  //       setMyPokemon(myPokemonLS)
-  //     }
-  //   } else {
-  //     setMyPokemon([])
-  //   }
-  // }, [])
-
-  // // Set localStorage on state change
-  // useEffect(() => {
-  //   localStorage.setItem('my_pokemon', JSON.stringify(myPokemon))
-  // }, [myPokemon])
-
 
   return (
     <GameContext.Provider value={{ setTurno, turno, setBoard, board, handleClick, winner, handleWinner, setWinner }}>
