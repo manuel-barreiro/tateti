@@ -6,7 +6,7 @@ import { GameProvider } from "@/context/GameContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MB Tic Tac Toe",
+  title: "MB TaTeTi",
   description: "Jugá y divertite",
 };
 
